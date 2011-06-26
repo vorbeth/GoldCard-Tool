@@ -96,6 +96,11 @@ namespace gCardTool
                 if (cmbMmc.Items.Count > 0)
                 {
                     cmbMmc.SelectedIndex = 0;
+                    button3.Enabled = true;
+                }
+                else
+                {
+                    button3.Enabled = false;
                 }
             }
             catch (Exception ex)
@@ -194,7 +199,7 @@ namespace gCardTool
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Text += " 0.0.6";
+            this.Text += " 0.0.7";
             this.Text += new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator) ? " (Admin)" : "";
             this.Icon = Properties.Resources.microsd;
             listTargetDrives();
@@ -344,7 +349,7 @@ namespace gCardTool
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Process p = new Process();
-            p.StartInfo.FileName = "http://www.vorbeth.co.uk";
+            p.StartInfo.FileName = "http://l.vorbeth.co.uk/ieyrI4";
             p.Start();
         }
 
@@ -362,6 +367,38 @@ namespace gCardTool
         {
             txtDbgOut.SelectionStart = txtDbgOut.TextLength;
             txtDbgOut.ScrollToCaret();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string driveLetter = cmbMmc.SelectedItem.ToString().Substring(0, 2).ToUpper();
+            DialogResult r = MessageBox.Show("This will wipe all data on drive " + driveLetter + "\nAre you sure?", "Format Drive", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (r == DialogResult.Yes)
+            {
+                txtDbgOut.Text += "Formatting drive " + driveLetter + " to FAT32" + "\r\n";
+
+                using (StreamWriter sw = new StreamWriter(tempPath + "formatmmc.cmd"))
+                {
+                    sw.WriteLine("@echo off");
+                    sw.WriteLine("echo |FORMAT " + driveLetter + " /V:GoldCard /FS:FAT32 /X /Q");
+                    sw.Close();
+                }
+
+                Process fmMMC = new Process();
+                fmMMC.StartInfo.UseShellExecute = false;
+                fmMMC.StartInfo.FileName = tempPath + "formatmmc.cmd";
+                fmMMC.StartInfo.WorkingDirectory = tempPath;
+                fmMMC.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                fmMMC.StartInfo.CreateNoWindow = true;
+                fmMMC.Start();
+                fmMMC.WaitForExit();
+
+                txtDbgOut.Text += "Formatting done." + "\r\n";
+                txtDbgOut.Text += "Unmount MMC before reading CID." + "\r\n";
+                txtDbgOut.Text += "------------------------" + "\r\n";
+            }
+            if (File.Exists(tempPath + "formatmmc.cmd")) { File.Delete(tempPath + "formatmmc.cmd"); }
+
         }
     }
 }

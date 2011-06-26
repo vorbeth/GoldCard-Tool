@@ -45,6 +45,7 @@
             this.linkLabel2 = new System.Windows.Forms.LinkLabel();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.txtDbgOut = new System.Windows.Forms.TextBox();
+            this.button3 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -164,6 +165,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button3);
             this.groupBox2.Controls.Add(this.cmbMmc);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.btnRefreshMmc);
@@ -200,12 +202,12 @@
             // linkLabel2
             // 
             this.linkLabel2.AutoSize = true;
-            this.linkLabel2.Location = new System.Drawing.Point(265, 372);
+            this.linkLabel2.Location = new System.Drawing.Point(215, 372);
             this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(100, 13);
+            this.linkLabel2.Size = new System.Drawing.Size(150, 13);
             this.linkLabel2.TabIndex = 12;
             this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "www.vorbeth.co.uk";
+            this.linkLabel2.Text = "donate @ www.vorbeth.co.uk";
             this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel2_LinkClicked);
             // 
             // groupBox4
@@ -227,6 +229,16 @@
             this.txtDbgOut.Size = new System.Drawing.Size(341, 91);
             this.txtDbgOut.TabIndex = 0;
             this.txtDbgOut.TextChanged += new System.EventHandler(this.txtDbgOut_TextChanged);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(232, 46);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(113, 23);
+            this.button3.TabIndex = 8;
+            this.button3.Text = "Format MMC";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Form1
             // 
@@ -277,6 +289,7 @@
         private System.Windows.Forms.RadioButton radMMC0;
         private System.Windows.Forms.RadioButton radMMC1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button3;
     }
 }
 
