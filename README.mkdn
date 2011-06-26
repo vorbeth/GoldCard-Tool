@@ -1,0 +1,9 @@
+GoldCard Tool for HTC devices
+=================================
+
+Info
+---------------
+A GoldCard is a special SD card that allows you to flash your phone with a new ROM.
+This is required as part of the process of rooting your HTC Desire amongst other devices.
+
+This project was built using Visual Studio C# Express 2010
